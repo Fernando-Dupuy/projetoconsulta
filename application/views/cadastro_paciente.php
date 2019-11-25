@@ -1,7 +1,7 @@
 <?php echo validation_errors();?>
 <div class="container my-10">
     <?php
-    echo form_open('medicos/cadastrarPaciente'); ?>
+    echo form_open('pacientes/cadastrarPaciente'); ?>
 
     <div class="form-group">
 

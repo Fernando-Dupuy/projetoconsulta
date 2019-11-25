@@ -1,47 +1,50 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Medicos extends CI_Controller
+class Pacientes extends CI_Controller
 {
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Medicos_model');
+        $this->load->model('Pacientes_model');
         $this->load->helper('form');
     }
 
     public function index()
     {
-        $data['title'] = 'Medicos Home';
+
+       
+        $data['title'] = "Agenda do Dia";
         $this->load->view('templates/header', $data);
-        //$this->load->view('cadastro_medico', $data);
+        $this->load->view('templates/nav-top');
+        $this->load->view('medicos', $data);
         $this->load->view('templates/js');
         $this->load->view('templates/footer');
-        
     }
-    
-    public function cadastrarMedico()
+
+    public function cadastrarPaciente()
     {
+      
         $this->load->library('form_validation');
 
-        $data['title'] = "Cadastro de Medico";
+        $data['title'] = "Cadastro de Paciente";
 
-        $this->form_validation->set_rules('login', 'Login', 'required');
-        $this->form_validation->set_rules('senha', 'Senha', 'required');
         $this->form_validation->set_rules('nome', 'Nome', 'required');
         $this->form_validation->set_rules('cpf', 'CPF', 'required');
-        $this->form_validation->set_rules('crm', 'CRM', 'required');
+        $this->form_validation->set_rules('telefone', 'Telefone', 'required');
 
         if ($this->form_validation->run() === false) {
             $this->load->view('templates/header', $data);
-            $this->load->view('cadastro_medico', $data);
+            $this->load->view('templates/nav-top');
+            $this->load->view('cadastro_paciente', $data);
             $this->load->view('templates/js');
             $this->load->view('templates/footer');
         } else {
-            $data['caminho'] = 'medicos/cadastrarMedico';
-            $this->Medicos_model->inserir();
+            
+            $this->Pacientes_model->criar();
             $this->load->view('templates/header', $data);
-            $this->load->view('sucesso_cadastro', $data);
+            $this->load->view('sucesso_cadastro');
             $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }

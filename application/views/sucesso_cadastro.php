@@ -5,7 +5,7 @@
 		<hr class="my-2">
 		<p>More info</p>
 		<p class="lead">
-			<a class="btn btn-primary btn-lg" href="<?= base_url()?>index.php/medicos/cadastrarPaciente" role="button">Retornar</a>
+			<a class="btn btn-primary btn-lg" href="<?= base_url()?>index.php/<?= $caminho?>" role="button">Retornar</a>
 		</p>
 	</div>
 </div>
