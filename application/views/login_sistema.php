@@ -1,4 +1,4 @@
-<? echo validation_errors(); ?>
+<?php echo validation_errors(); ?>
 <div class="container d-flex justify-content-center">
     <div class="card w-50 mt-5">
         <div class="card-body ">

@@ -1,15 +1,15 @@
-<?php
-defined('BASEPATH') or exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
-    public function __construct(Type $var = null)
+    public function __construct()
     {
         parent::__construct();
         $this->load->model('Medicos_model');
         $this->load->model('Pacientes_model');
         $this->load->model('Usuario_model');
         $this->load->helper('form');
+        $this->user_id = $this->session->userdata('user_id');
     }
 
     public function index()
@@ -24,20 +24,29 @@ class Login extends CI_Controller
 
     public function logar()
     {
-        $usuario = $this->Usuario_model->validar();
-        // $data['status'] = $usuario;
-        // $this->load->view('teste', $data);
+        $logon = array(
+            'login' => $this->input->post('login'),
+            'senha' => $this->input->post('senha')
+        );
+        $validacao = $this->Usuario_model->validar($logon);
+        print $validacao->login;
 
-        if ($usuario) {
-            $this->session->set_userdata('bem vindo', $usuario);
-            $this->session->flashdata('success', "Usuario Logado!");
+        // $data['usuario'] = $usuario;
+        if ($validacao) {
+            $usuario = array(
+                'user_id' => $validacao->usuarioID,
+                'login' => $validacao->login,
+                'tipo' => $validacao->tipo
+            );
+            $this->session->set_userdata($usuario);
+            $this->session->set_flashdata('success', "Usuario Logado!");
         } else {
-            $this->session->flashdata('danger', "Usuario ou senha invalidos!");
+            $this->session->set_flashdata('danger', "Usuario ou senha invalidos!");
         }
-        if ($usuario['tipo']) {
-            redirect(' /medicos/');
+        if ($usuario['tipo'] === true) {
+            redirect("/medicos/");
         } else {
-            redirect(' /pacientes/');
+            redirect("/pacientes/");
         }
     }
 }

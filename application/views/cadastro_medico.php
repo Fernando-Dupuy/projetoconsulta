@@ -11,7 +11,7 @@
 
                 <div class="form-group">
 
-                    <label for="nome">Login:</label>
+                    <label for="login">Login:</label>
                     <?= form_input(array(
                         "name" => "login",
                         "id" => "login",
@@ -20,7 +20,7 @@
                     )); ?>
                     <small id="helpId" class="form-text text-muted">Informe um nome de usuario.</small>
 
-                    <label for="nome">Senha:</label>
+                    <label for="login">Senha:</label>
                     <?= form_input(array(
                         "name" => "senha",
                         "id" => "senha",

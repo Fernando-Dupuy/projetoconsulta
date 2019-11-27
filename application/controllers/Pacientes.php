@@ -18,7 +18,7 @@ class Pacientes extends CI_Controller
         $data['title'] = "Agenda do Dia";
         $this->load->view('templates/header', $data);
         $this->load->view('templates/nav-top');
-        $this->load->view('medicos', $data);
+        $this->load->view('teste', $data);
         $this->load->view('templates/js');
         $this->load->view('templates/footer');
     }
